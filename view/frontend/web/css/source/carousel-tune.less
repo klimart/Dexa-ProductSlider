@@ -1,0 +1,98 @@
+/**
+ * Dexa
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+
+ * @category    Dexa
+ * @package     Dexa Productslider
+ * @author      Dexa Core Team
+ * @copyright   Copyright (c) 2015 Dexa (http://www.dexamage.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+
+.m-carousel {
+  padding-bottom: 10px;
+
+  &-controls {
+    width: 100%;
+  }
+
+  &-inner {
+    .product.name a.product-item-link {
+      font-size: 1.4rem;
+    }
+  }
+
+  &.m-center {
+    /* Fix not visible slider for firefox */
+    text-align:  left;
+  }
+}
+
+.m-item {
+  &.products {
+    margin: 10px 0;
+  }
+
+  .m-card-light {
+    width: 200px;
+    margin: 7px 7px 0 7px;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .m-card-dark {
+    h3 {
+      margin-top: 0;
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/*----------- navigation buttons on both sides of the slider -----------*/
+
+a.group-Prev, a.group-Next {
+  width: 50px;
+  height: 150px;
+  background: transparent url('../Dexa_ProductSlider/images/navbuttons2.gif');
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  user-select: none;
+}
+
+a.group-Prev {
+  background-position:0 0;
+  left: 20px;
+
+  &:hover {
+    background-position: 50px 0;
+  }
+}
+
+a.group-Next {
+  background-position: 0 -150px;
+  right: 20px;
+
+  &:hover {
+    background-position: 50px -150px;
+  }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Dexa_ProductSlider::dexa_productslider" title="Product Slider" module="Dexa_ProductSlider" sortOrder="50" parent="Magento_Backend::content_elements" action="dexa_productslider/slider" resource="Dexa_ProductSlider::content"/>
+    </menu>
+</config>

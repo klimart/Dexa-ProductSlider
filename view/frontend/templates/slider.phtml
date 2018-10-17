@@ -1,0 +1,131 @@
+<?php
+
+use Magento\Framework\App\Action\Action;
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * ProductSlider template
+ *
+ * @var $block Dexa\ProductSlider\Block\Slider
+ */
+?>
+<?php
+$productSliderId = $block->getSliderId();
+$productCollection = $block->getProducts();
+
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+
+$pos = 1;
+$viewMode = 'grid';
+$image = 'category_page_grid';
+$showDescription = false;
+$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+?>
+<?php /** Product slider */ ?>
+<?php if($productCollection && count($productCollection)): ?>
+    <div class="m-carousel m-center m-fade-out" id="mobify-slider-<?php echo $productSliderId; ?>" data-mage-init='{"mobifyCarouselInit":{"sliderId":"<?php echo $productSliderId; ?>"}}'>
+        <?php if ($block->isCategorySlider()): ?>
+        <label class="productslider-title productslider-title-<?php echo $productSliderId; ?>"><?php echo $block->getCategoryBreadCrumbs(); ?></label>
+        <?php endif; ?>
+        <div class="m-carousel-inner" style="-webkit-transform: translate3d(0px, 0px, 0px);">
+            <?php $productNum = 0; ?>
+            <?php foreach($productCollection as $_product): ?>
+                <?php $productNum++; ?>
+                <div class="m-item <?php if($productNum == 1) echo 'm-active'; ?> products list items">
+                    <div class="m-card-light item product product-item">
+                        <?php // Product Template ?>
+                        <?php
+                        $productImage = $block->getImage($_product, $image);
+                        if ($pos != null) {
+                            $position = ' style="left:' . $productImage->getWidth() . 'px;'
+                                . 'top:' . $productImage->getHeight() . 'px;"';
+                        }
+                        ?>
+                        <?php // Product Image ?>
+                        <a href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1">
+                            <?php echo $productImage->toHtml(); ?>
+                        </a>
+                        <div class="product details product-item-details">
+                            <?php
+                            $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                            ?>
+                            <strong class="product name product-item-name">
+                                <a class="product-item-link"
+                                   href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>">
+                                    <?php /* @escapeNotVerified */ echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+                                </a>
+                            </strong>
+                            <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
+                            <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>
+                            <?php echo $block->getProductDetailsHtml($_product); ?>
+
+                            <div class="product-item-inner">
+                                <div class="product actions product-item-actions"<?php echo strpos($pos, $viewMode . '-actions') ? $position : ''; ?>>
+                                    <div class="actions-primary"<?php echo strpos($pos, $viewMode . '-primary') ? $position : ''; ?>>
+                                        <?php if ($_product->isSaleable()): ?>
+                                            <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                            <form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+                                                <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+                                                <input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                                <?php echo $block->getBlockHtml('formkey')?>
+                                                <button type="submit"
+                                                        title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
+                                                        class="action tocart primary">
+                                                    <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                                </button>
+                                            </form>
+                                        <?php else: ?>
+                                            <?php if ($_product->getIsSalable()): ?>
+                                                <div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+                                            <?php else: ?>
+                                                <div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div data-role="add-to-links" class="actions-secondary"<?php echo strpos($pos, $viewMode . '-secondary') ? $position : ''; ?>>
+                                        <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()): ?>
+                                            <a href="#"
+                                               class="action towishlist"
+                                               title="<?php echo $block->escapeHtml(__('Add to Wish List')); ?>"
+                                               aria-label="<?php echo $block->escapeHtml(__('Add to Wish List')); ?>"
+                                               data-post='<?php /* @escapeNotVerified */ echo $block->getAddToWishlistParams($_product); ?>'
+                                               data-action="add-to-wishlist"
+                                               role="button">
+                                                <span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+                                            </a>
+                                        <?php endif; ?>
+                                        <?php
+                                        $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+                                        ?>
+                                        <a href="#"
+                                           class="action tocompare"
+                                           title="<?php echo $block->escapeHtml(__('Add to Compare')); ?>"
+                                           aria-label="<?php echo $block->escapeHtml(__('Add to Compare')); ?>"
+                                           data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_product); ?>'
+                                           role="button">
+                                            <span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <?php if ($showDescription):?>
+                                    <div class="product description product-item-description">
+                                        <?php /* @escapeNotVerified */ echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                                        <a href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+                                           class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="m-carousel-controls">
+            <a href="#" class="group-Prev" data-slide="prev"></a>
+            <a href="#" class="group-Next" data-slide="next"></a>
+        </div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,54 @@
+/**
+ * Copyright © 2015 Dexa. All rights reserved.
+ * See DEXA.txt for license details.
+ */
+
+@import "../lib/carousel.less"; // import mobify js lib styles
+@import "../lib/carousel-style.less"; // import mobify js lib styles
+@import "carousel-tune.less";
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+  .m-carousel {
+    .m-item.products {
+      margin: 10px 0 30px;
+    }
+
+    .productslider-title {
+      text-align: center;
+      display: block;
+      text-transform: uppercase;
+    }
+
+    .m-carousel-controls {
+      .group-Prev,.group-Next {
+        top: 127px;
+      }
+    }
+  }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+  .m-carousel {
+    &.m-center  {
+      padding-left: 100px;
+    }
+  }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+  .m-carousel-controls {
+    display: none;
+  }
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="ProductSliderGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Dexa\ProductSlider\Model\ResourceModel\ProductSlider\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ProductSliderGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ProductSliderGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!--<type name="Dexa\ProductSlider\Model\Slider\DataProvider">-->
+        <!--<arguments>-->
+            <!--<argument name="collection" xsi:type="object" shared="false">Dexa\ProductSlider\Model\ResourceModel\ProductSlider\Collection</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="dexa_productslider_grid_data_source" xsi:type="string">Dexa\ProductSlider\Model\ResourceModel\ProductSlider\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Dexa\ProductSlider\Model\ResourceModel\ProductSlider\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">dexa_productslider</argument>
+            <argument name="eventPrefix" xsi:type="string">dexa_productslider_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">productslider_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Dexa\ProductSlider\Model\ResourceModel\ProductSlider</argument>
+        </arguments>
+    </type>
+    <preference for="Dexa\ProductSlider\Api\Data\ProductSliderInterface" type="Dexa\ProductSlider\Model\ProductSlider"/>
+    <preference for="Dexa\ProductSlider\Api\ProductSliderRepositoryInterface" type="Dexa\ProductSlider\Model\ProductSliderRepository"/>
+</config>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <!--<block name="productSlider3" class="Dexa\ProductSlider\Block\Slider">
+                <arguments>
+                    <argument name="section" xsi:type="string">homepage</argument>
+                    <argument name="position" xsi:type="number">1</argument>
+                    <argument name="slider_id" xsi:type="number">3</argument>
+                </arguments>
+            </block>
+            <block name="productSlider1" class="Dexa\ProductSlider\Block\Slider">
+                <arguments>
+                    <argument name="section" xsi:type="string">homepage</argument>
+                    <argument name="position" xsi:type="number">2</argument>
+                    <argument name="slider_id" xsi:type="number">1</argument>
+                </arguments>
+            </block>
+            <block name="productSlider2" class="Dexa\ProductSlider\Block\Slider">
+                <arguments>
+                    <argument name="section" xsi:type="string">homepage</argument>
+                    <argument name="position" xsi:type="number">3</argument>
+                    <argument name="slider_id" xsi:type="number">2</argument>
+                </arguments>
+            </block>-->
+        </referenceContainer>
+    </body>
+</page>
